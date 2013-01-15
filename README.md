@@ -6,7 +6,11 @@ This is a rapidly-developed, command-line version of the game. It uses the same 
 
 ## Setup Instructions
 
-Install SWI Prolog using the link above. Move into the directory where you cloned this archive and type:
+Install SWI Prolog using the link above. If you don't already have [MacPorts](http://www.macports.org/index.php) installed, go ahead and do that. Then run:
+
+    $ sudo port install swi-prolog
+
+You may get some error messages at this point, and will have to deal with them appropriately. Most likely though, you can probably just move into the directory where you cloned this archive and type:
 
     $ swipl
     
