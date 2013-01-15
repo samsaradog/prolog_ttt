@@ -22,7 +22,7 @@ Stay tuned for further developments. The adventure continues.
 
 ## Bonus Material
 
-There is a fizzbuzz.pl file with the fizzbuzz kata in prolog for your enjoyment and edification. Running it is similar to the above:
+There is a fizzbuzz.pl file with a solution to the fizzbuzz kata in prolog for your enjoyment and edification. Running it is similar to the above:
 
     ?- ['fizzbuzz'].
     ?- run_tests.
