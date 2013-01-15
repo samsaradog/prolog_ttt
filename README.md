@@ -20,3 +20,11 @@ Don't forget the period at the end of the line. This loads the test file, which 
 
 Stay tuned for further developments. The adventure continues.
 
+## Bonus Material
+
+There is a fizzbuzz.pl file with the fizzbuzz kata in prolog for your enjoyment and edification. Running it is similar to the above:
+
+    ?- ['fizzbuzz'].
+    ?- run_tests.
+
+Enjoy!
