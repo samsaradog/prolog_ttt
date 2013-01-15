@@ -45,6 +45,17 @@ gridPositions([1,2,3,4,5,6,7,8,9]).
 viewCell(X,Y) :- var(X), write(Y).
 viewCell(X,_Y) :- \+var(X),write(X).
 
+bestMove(Move) :-
+	grid(GridState),
+	findall(X,addMoveToGrid(o,GridState,X),Moves),
+	findBestMove(Moves,Move), !.
+	
+findBestMove([H|_],Move) :- Move = H, !.
+
+%%
+%% Sugar goals for human players
+%%
+
 displayGrid([],[]).
 displayGrid([G1,G2,G3|GT],[P1,P2,P3|PT]) :-
   write(' '), viewCell(G1,P1),write(' | '),viewCell(G2,P2),write(' | '),viewCell(G3,P3),nl,

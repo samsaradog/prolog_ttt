@@ -10,7 +10,7 @@ Install SWI Prolog using the link above. If you don't already have [MacPorts](ht
 
     $ sudo port install swi-prolog
 
-You may get some error messages at this point, and will have to deal with them appropriately. Most likely though, you can probably just move into the directory where you cloned this archive and type:
+You may get some error messages at this point, and will have to deal with them appropriately. Most likely though, even with the errors, you can probably just move into the directory where you cloned this archive and type:
 
     $ swipl
     
@@ -24,9 +24,15 @@ Don't forget the period at the end of the line. This loads the test file, which 
 
 Stay tuned for further developments. The adventure continues.
 
+## Sources
+
+There are many resources on the web for learning Prolog. The one I found most useful was a [tutorial](http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/pt_framer.html) by J. R. Fisher at CSU Pomona. You may notice that it contains an implementation of a Tic-Tac-Toe game, which I built on
+extensively. While there are similarities, such as using a list of unbound variables
+to represent the game, the search algorithm in the tutorial is different. Dr. (I presume) Fisher used a value assessment for each node that included the number of potential wins available for each player, and only searches the graph to a depth of two. If I use a minimax algorithm, I'll use the same pruning algorithm as in other implementations, meaning to search the entire pruned graph to find the best move. Then again, I may revert to a rule-based system like I used in my first c++ implementation.
+
 ## Bonus Material
 
-There is a fizzbuzz.pl file with a solution to the fizzbuzz kata in prolog for your enjoyment and edification. Running it is similar to the above:
+There is a fizzbuzz.pl file with a solution to the fizzbuzz kata in prolog for your pleasure and edification. Running it is similar to the above:
 
     ?- ['fizzbuzz'].
     ?- run_tests.
