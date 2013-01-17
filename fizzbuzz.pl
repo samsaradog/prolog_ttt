@@ -17,14 +17,14 @@ test(fizzbuzz2) :-
 test(fizzbuzz3) :-
   fizzbuzz(3,'fizz').
 
-test(fizzbuzz3a, [fail]) :-
-  fizzbuzz(3,3).
+test(fizzbuzz3a) :-
+  not(fizzbuzz(3,3)).
 
 test(fizzbuzz5) :-
   fizzbuzz(5,'buzz').
 
-test(fizzbuzz5a, [fail]) :-
-  fizzbuzz(5,5).
+test(fizzbuzz5a) :-
+  not(fizzbuzz(5,5)).
 
 test(fizzbuzz6) :-
   fizzbuzz(6,'fizz').
