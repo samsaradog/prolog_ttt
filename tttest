@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo
+echo "running tests for tic-tac-toe"
+echo
+
+swipl -s tictactoe.plt -t halt -q -g run_tests
+
+echo
+echo "thank you for testing!"
+echo
+

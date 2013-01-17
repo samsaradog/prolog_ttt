@@ -26,13 +26,18 @@ This launches the game and allows you to play.
 
 In the directory where you cloned this archive type:
 
+    $ tttest
+
+This runs the tests without going into the SWI REPL. If you want to use the REPL,
+enter the following at the command prompt:
+
     $ swipl
     
-This will start a REPL-like interface for Prolog. This is not exactly like other REPL's you may be familiar with, but close enough for now. At the prompt enter:
+This is not exactly like other REPL's you may be familiar with, but close enough for now. If you want to run the tests, first enter:
 
     ?- ['tictactoe.plt'].
 
-Don't forget the period at the end of the line. This loads the test file, which in turn loads the prolog source file. To run the tests, enter:
+Don't forget the period at the end of the line. This loads the test file, which in turn loads the prolog source file. To actually run the tests, enter:
 
     ?- run_tests.
 
