@@ -1,8 +1,8 @@
 
 
-fizzbuzz(X,Y) :- (0 =:= mod(X,15)), Y = 'fizzbuzz', !.
-fizzbuzz(X,Y) :- (0 =:= mod(X,3)), Y = 'fizz', !.
-fizzbuzz(X,Y) :- (0 =:= mod(X,5)), Y = 'buzz', !.
+fizzbuzz(X,'fizzbuzz') :- (0 =:= mod(X,15)), !.
+fizzbuzz(X,'fizz') :- (0 =:= mod(X,3)), !.
+fizzbuzz(X,'buzz') :- (0 =:= mod(X,5)), !.
 fizzbuzz(X,X) :- (0 =\= mod(X,5)), (0 =\= mod(X,3)).
 
 
