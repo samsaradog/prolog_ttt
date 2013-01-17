@@ -24,6 +24,18 @@ Don't forget the period at the end of the line. This loads the test file, which 
 
 Stay tuned for further developments. The adventure continues.
 
+## Game Progress
+
+The game search algorithm is now working from within the repl. There is not yet a check on whether you can continue playing. This results in an error if the human enters the last move on the grid. To start a new game, enter:
+
+    ?- newGame.
+
+This will display the game board. To make a move, enter, for example:
+
+    ?- move(2).
+
+Be sure not to forget the period at the end of the command. The program will announce a winner, but not a draw game. Next step is to get a more friendly user interface running from a command line rather than inside the repl.
+
 ## Sources
 
 There are many resources on the web for learning Prolog. The one I found most useful was a [tutorial](http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/pt_framer.html) by J. R. Fisher at CSU Pomona. You may notice that it contains an implementation of a Tic-Tac-Toe game, which I built on
