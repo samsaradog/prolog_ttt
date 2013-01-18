@@ -18,7 +18,7 @@ You may get some error messages at this point, and will have to deal with them a
 
 The game is now working from the command line. There is a shell script included with this package that calls swipl with the correct options for running the game. From the command line, in the directory into which you clone this archive, enter:
 
-    ttt
+    $ ttt
 
 This launches the game and allows you to play.
 
