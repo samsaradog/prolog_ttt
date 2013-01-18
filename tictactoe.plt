@@ -278,7 +278,7 @@ test(tictactoe_best_move12, [ setup(initialize_grid) ] ) :-
 
 test(tictactoe_best_move13, [ setup(initialize_grid) ] ) :-
 	player_move(x,"5"),
-	best_move(X) -> (X=="1";X=="3";X=="6";X=="9"),!.
+	best_move(X) -> (X=="1";X=="3";X=="7";X=="9"),!.
 
 
 :- end_tests(tictactoe_best_move).
