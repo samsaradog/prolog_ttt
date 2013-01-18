@@ -8,6 +8,14 @@ Setup involves installing a Prolog interpreter on your computer. This project wa
 
 ## Setup Instructions
 
+### Using Brew
+
+This is the easiest way to go, especially since many people prefer brew to MacPorts:
+
+    $ brew install swi-prolog
+
+### Using MacPorts
+
 Install SWI Prolog using the link above. If you don't already have [MacPorts](http://www.macports.org/index.php) installed, go ahead and do that. Then run:
 
     $ sudo port install swi-prolog
