@@ -9,6 +9,9 @@ car([H|_],Element) :- Element = H.
 
 %% Used for shuffling moves
 
+:- use_module(shuffle).
+
+/*
 select_nth0(Index,Element,List,NewList) :-
 	nth0(Index,List,Element),
 	select(Element,List,NewList),!.
@@ -26,9 +29,9 @@ shuffle([],[]).
 shuffle(List,[Element|NewList]) :-
 	choose_element(List,Element,NextList),
 	shuffle(NextList,NewList).
-	
+*/	
 %% Grid goals
-
+/*
 initialize_grid :-
   retractall(grid(_)),
   assert(grid([_C1,_C2,_C3,_C4,_C5,_C6,_C7,_C8,_C9])).
@@ -73,6 +76,15 @@ find_winner(Player, [ _, _,G3, _, _,G6, _, _,G9]) :- G3 == Player,G6 == Player,G
 find_winner(Player, [G1, _, _, _,G5, _, _, _,G9]) :- G1 == Player,G5 == Player,G9 == Player.
 find_winner(Player, [ _, _,G3, _,G5, _,G7, _, _]) :- G3 == Player,G5 == Player,G7 == Player.
 
+find_moves(GridState,Moves) :- 
+	findall(X,match_move_to_grid(o,GridState,X),OrderedMoves),
+	shuffle(OrderedMoves,Moves).
+
+winner(Player) :-
+  grid(Current),
+  find_winner(Player,Current), !.
+*/
+
 grid_positions([1,2,3,4,5,6,7,8,9]).
 
 view_cell(X,Y) :- var(X), write(Y).
@@ -80,10 +92,6 @@ view_cell(X,_Y) :- \+var(X),write(X).
 
 swap_player(o,x).
 swap_player(x,o).
-
-find_moves(GridState,Moves) :- 
-	findall(X,match_move_to_grid(o,GridState,X),OrderedMoves),
-	shuffle(OrderedMoves,Moves).
 
 best_move(Move) :-
 	grid(GridState),
@@ -178,10 +186,6 @@ extract_value(o,Values,Value) :- max_list(Values,Value).
 %%
 %% Sugar goals for human players
 %%
-
-winner(Player) :-
-  grid(Current),
-  find_winner(Player,Current), !.
 
 draw_game :-
 	grid(Current),

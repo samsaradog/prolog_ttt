@@ -3,9 +3,9 @@
 
 all_var(List) :- maplist(var, List).
 
-someVar([_A,o,_B]).
-
 :- begin_tests(extract_move).
+
+%% these go with the tree
 
 test(extract_move1) :-
 	extract_move([0,-1,-1],[1,2,3],1).
@@ -18,6 +18,7 @@ test(extract_move3) :-
 
 :- end_tests(extract_move).
 
+/*
 :- begin_tests(shuffle).
 
 test(select_nth0) :-
@@ -54,6 +55,7 @@ test(big_shuffle) :-
 	member(4,X),!.
 	
 :- end_tests(shuffle).
+*/
 
 :- begin_tests(grid_values).
 
@@ -85,6 +87,8 @@ test(draw_grid_value, [setup(initialize_grid)] ) :-
 %%
 
 :- begin_tests(tictactoe_setup, [setup(initialize_grid)] ).
+
+someVar([_A,o,_B]).
 
 test(tictactoe3, [ setup(someVar(Tmp)), fail ] ) :-
   all_var(Tmp). 
