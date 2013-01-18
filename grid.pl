@@ -3,7 +3,12 @@
 :- module(grid, [initialize_grid/0,
 	             player_move/2,
 	             find_moves/2,
-	             winner/1]).
+	             find_winner/2,
+	             winner/1,
+	             draw_game/0,
+	             fetch_grid/1,
+	             dup_grid_with_move/4,
+	             move_available/1]).
 
 :- use_module(shuffle).
 
@@ -24,6 +29,18 @@ find_moves(GridState,Moves) :-
 winner(Player) :-
 	grid(Current),
 	find_winner(Player,Current), !.
+	
+draw_game :-
+	grid(Current),
+	find_moves(Current,Moves),
+	length(Moves,Length),
+	0 == Length, !.
+	
+fetch_grid(Grid) :- grid(Grid).
+
+move_available(Move) :-
+	grid(Current),
+	match_move_to_grid(_,Current,Move).
 
 match_move_to_grid(Player, [X|_],"1") :- var(X), X=Player.
 match_move_to_grid(Player, [_,X|_],"2") :- var(X), X=Player.
