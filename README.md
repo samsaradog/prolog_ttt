@@ -57,9 +57,9 @@ There are many resources on the web for learning Prolog. The one I found most us
 
 ## Bonus Material
 
-I have included a fizzbuzz.pl file with a solution to the fizzbuzz kata written in prolog as part of this repo. Running it is similar to the above:
+I have included files with solutions to the fizzbuzz and coin changer katas written in prolog as part of this repo. Running one of them is similar to the above. For example
 
-    ?- ['fizzbuzz'].
+    ?- ['coin_changer'].
     ?- run_tests.
 
 Enjoy!
