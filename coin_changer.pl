@@ -4,37 +4,17 @@ make_change(X,[X]) :- X > 100,!.
 
 make_change(X,Y) :- 
 	Remainder is 100 - X,
-	add_quarters(Remainder,Y),!.
+	make_change(Remainder,[25,10,5,1],Y),!.
 	
-add_quarters(X,[25|T]) :-
-	X > 24,
-	Y is X - 25,
-	add_quarters(Y,T).
-
-add_quarters(X,Y) :-
-	add_dimes(X,Y).
+make_change(0,_,[]).
+make_change(X,[FirstCoin|OtherCoins],[FirstCoin|List]) :-
+	X >= FirstCoin,
+	Y is X - FirstCoin,
+	make_change(Y,[FirstCoin|OtherCoins],List).
 	
-add_dimes(X,[10|T]) :-
-	X > 9,
-	Y is X - 10,
-	add_dimes(Y,T).
+make_change(X,[_FirstCoin|OtherCoins],List) :-
+	make_change(X,OtherCoins,List).
 	
-add_dimes(X,Y) :-
-	add_nickels(X,Y).
-	
-add_nickels(X,[5|T]) :-
-	X > 4,
-	Y is X - 5,
-	add_nickels(Y,T).
-	
-add_nickels(X,Y) :-
-	add_pennies(X,Y).
-	
-add_pennies(0,[]).
-add_pennies(X,[1|T]) :-
-	Y is X - 1,
-	add_pennies(Y,T).
-
 :- begin_tests(coin_changer).
 
 test(less_than_zero) :-
