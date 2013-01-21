@@ -1,14 +1,53 @@
 %% best_move.pl
 
-:- module(best_move,[best_move/1,
-	                 grid_value/4]).
+:- module(best_move,[draw_game/0,
+	                 winner/1,
+					 best_move/1,
+					 grid_value/4]).
 
 :- use_module(grid).
+
+draw_game :-
+	fetch_grid(Current),
+	find_moves(Current,Moves),
+	length(Moves,Length),
+	0 == Length, !.
+
+winner(Player) :-
+	fetch_grid(Current),
+	find_winner(Player,Current), !.
+
+%% Rows
+find_winner(Player, [G1,G2,G3, _, _, _, _, _, _]) :- G1 == Player,G2 == Player,G3 == Player.
+find_winner(Player, [ _, _, _,G4,G5,G6, _, _, _]) :- G4 == Player,G5 == Player,G6 == Player.
+find_winner(Player, [ _, _, _, _, _, _,G7,G8,G9]) :- G7 == Player,G8 == Player,G9 == Player.
+
+%% Columns
+find_winner(Player, [G1, _, _,G4, _, _,G7, _, _]) :- G1 == Player,G4 == Player,G7 == Player.
+find_winner(Player, [ _,G2, _, _,G5, _, _,G8, _]) :- G2 == Player,G5 == Player,G8 == Player.
+find_winner(Player, [ _, _,G3, _, _,G6, _, _,G9]) :- G3 == Player,G6 == Player,G9 == Player.
+
+%% Diagonals
+find_winner(Player, [G1, _, _, _,G5, _, _, _,G9]) :- G1 == Player,G5 == Player,G9 == Player.
+find_winner(Player, [ _, _,G3, _,G5, _,G7, _, _]) :- G3 == Player,G5 == Player,G7 == Player.
+
+%%%%%%
 
 car([H|_],H).
 
 swap_player(o,x).
 swap_player(x,o).
+
+%%% Meta-predicate based on include/3
+
+build_winners([],_,_,[]).
+build_winners([Move|T],Player,GridState,Result) :-
+	( dup_grid_with_move(Player,GridState,NewGridState,Move),
+	  find_winner(Player,NewGridState) -> Result = [Move|NextResult]
+	  ; NextResult = Result),
+	build_winners(T,Player,GridState,NextResult).
+
+%%%
 
 best_move(Move) :-
 	fetch_grid(GridState),
@@ -30,8 +69,7 @@ find_best_move(_Player,Move,Moves,_GridState) :-
 find_best_move(_Player,Move,Moves,_GridState) :-
 	length(Moves,8),
 	not(member("5",Moves)),
-	shuffle(["1","3","7","9"],[H|_]),
-	Move=H.
+	shuffle(["1","3","7","9"],[Move|_]).
 
 %% when best move is the last one on the grid.
 
@@ -67,15 +105,6 @@ extract_move([ValueHead|ValueTail],Value,[MoveHead|MoveTail],Move,Result) :-
 	ValueHead > Value -> extract_move(ValueTail,ValueHead,MoveTail,MoveHead,Result)
 	; extract_move(ValueTail,Value,MoveTail,Move,Result).
 	
-%% Meta-predicate based on include/3
-	
-build_winners([],_,_,[]).
-build_winners([Move|T],Player,GridState,Result) :-
-	( dup_grid_with_move(Player,GridState,NewGridState,Move),
-	  find_winner(Player,NewGridState) -> Result = [Move|NextResult]
-	  ; NextResult = Result),
-	build_winners(T,Player,GridState,NextResult).
-	
 %% Derives value for current grid
 
 grid_value(_,_Moves,GridState,-1) :- find_winner(x,GridState),!.
@@ -99,3 +128,15 @@ build_values(Player,GridState,[Move|T],Values) :-
 	
 extract_value(x,Values,Value) :- min_list(Values,Value).
 extract_value(o,Values,Value) :- max_list(Values,Value).
+
+%%
+
+dup_grid_with_move(P,[G1|T],[P|T],"1") :- var(G1).
+dup_grid_with_move(P,[G1,G2|T],[G1,P|T],"2") :- var(G2).
+dup_grid_with_move(P,[G1,G2,G3|T],[G1,G2,P|T],"3") :- var(G3).
+dup_grid_with_move(P,[G1,G2,G3,G4|T],[G1,G2,G3,P|T],"4") :- var(G4).
+dup_grid_with_move(P,[G1,G2,G3,G4,G5|T],[G1,G2,G3,G4,P|T],"5") :- var(G5).
+dup_grid_with_move(P,[G1,G2,G3,G4,G5,G6|T],[G1,G2,G3,G4,G5,P|T],"6") :- var(G6).
+dup_grid_with_move(P,[G1,G2,G3,G4,G5,G6,G7|T],[G1,G2,G3,G4,G5,G6,P|T],"7") :- var(G7).
+dup_grid_with_move(P,[G1,G2,G3,G4,G5,G6,G7,G8|T],[G1,G2,G3,G4,G5,G6,G7,P|T],"8") :- var(G8).
+dup_grid_with_move(P,[G1,G2,G3,G4,G5,G6,G7,G8,G9|T],[G1,G2,G3,G4,G5,G6,G7,G8,P|T],"9") :- var(G9).
