@@ -55,11 +55,4 @@ Stay tuned for further developments. The adventure continues.
 
 There are many resources on the web for learning Prolog. The one I found most useful was a [tutorial](http://www.csupomona.edu/~jrfisher/www/prolog_tutorial/pt_framer.html) by J. R. Fisher at CSU Pomona. You may notice that it contains an implementation of a Tic-Tac-Toe game, which I built on extensively. While there are similarities, such as using a list of unbound variables to represent the game, the search algorithm in the tutorial is different. Dr. (I presume) Fisher used a value assessment for each node that included the number of potential wins available for each player, and only searches the graph to a depth of two. I'm using a plain α/β search with no pruning, and a few goals added to increase efficiency.
 
-## Bonus Material
-
-I have included files with solutions to the fizzbuzz and coin changer katas written in prolog as part of this repo. Running one of them is similar to the above. For example
-
-    ?- ['coin_changer'].
-    ?- run_tests.
-
 Enjoy!
