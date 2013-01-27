@@ -62,6 +62,7 @@ play(computer) :-
 new_game :-
   initialize_grid,
   R is random(2),
+  write('randomly selecting first player'),nl,
   first_move(R),
   show_game,
   play(human).
@@ -79,7 +80,7 @@ good_answer("n").
 
 ask_to_play_again(Answer) :-
 	write('would you like to play again? (y/n):'),nl,
-	read_line(Answer),
+	read_line(Answer),nl,
 	good_answer(Answer),!.
 
 ask_to_play_again(Answer) :-
