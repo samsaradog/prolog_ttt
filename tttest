@@ -4,7 +4,7 @@ echo
 echo "running tests for tic-tac-toe"
 echo
 
-swipl -s tictactoe.plt -t halt -g run_tests
+swipl -s spec/test_all.plt -t halt -g run_tests
 
 echo
 echo "thank you for testing!"

@@ -1,31 +1,29 @@
 %% tictactoe.pl
 
-:- [library(dcg/basics),
-    library(dialect/sicstus)].
-
 :- use_module(grid).
 :- use_module(shuffle).
 :- use_module(best_move).
 :- use_module(view).
+:- use_module(io).
 
 %%%%%%%%%%%
 
 check_draw_game :-
 	draw_game,
-	write('draw game'),nl,nl.
+	user_message('draw game'),line_break,line_break.
 	
 check_winner :- 
 	winner(o), 
-	write('the computer has won!'),nl,nl.
+	user_message('the computer has won!'),line_break,line_break.
 	
 %%%%%%%%%%%
 
 first_move(0) :-
-    nl,write('human goes first'),nl,nl.
+    line_break,user_message('human goes first'),line_break,line_break.
 
 first_move(1) :- 
 	computer_move,
-	nl,write('computer goes first'),nl,nl.
+	line_break,user_message('computer goes first'),line_break,line_break.
 
 %%%%%%%%%%%
 
@@ -34,12 +32,12 @@ computer_move :-
 	player_move(o,X).
 
 human_move(Move) :-
-	nl,write('please choose a square (1-9):'),nl,
-	read_line(Move),nl,
+	line_break,user_message('please choose a square (1-9):'),line_break,
+	fetch_input(Move),line_break,
 	move_available(Move), !.
 	
 human_move(Move) :-
-	write('the square you selected is not available'),nl,
+	user_message('the square you selected is not available'),line_break,
 	human_move(Move).
 
 %%%%%%%%%%%
@@ -47,13 +45,13 @@ human_move(Move) :-
 play(human) :-
   human_move(Move),
   player_move(x,Move),
-  not(check_draw_game), !,
+  \+check_draw_game, !,
   play(computer).
 
 play(computer) :-
   computer_move,
-  not(check_winner), !,
-  not(check_draw_game),
+  \+check_winner, !,
+  \+check_draw_game,
   show_game,
   play(human).
 
@@ -62,7 +60,7 @@ play(computer) :-
 new_game :-
   initialize_grid,
   R is random(2),
-  write('randomly selecting first player'),nl,
+  user_message('randomly selecting first player'),line_break,
   first_move(R),
   show_game,
   play(human).
@@ -79,18 +77,18 @@ good_answer("N").
 good_answer("n").
 
 ask_to_play_again(Answer) :-
-	write('would you like to play again? (y/n):'),nl,
-	read_line(Answer),nl,
+	user_message('would you like to play again? (y/n):'),line_break,
+	fetch_input(Answer),line_break,
 	good_answer(Answer),!.
 
 ask_to_play_again(Answer) :-
-	nl,write('please enter y or n'),nl,nl,
+	line_break,user_message('please enter y or n'),line_break,line_break,
 	ask_to_play_again(Answer).
 
 %%%%%%%%%%%
 
 done :-
-	show_game,nl,
+	show_game,line_break,
 	ask_to_play_again(Answer),!,
 	( Answer == "y"; Answer == "Y"),!,
 	ttt.

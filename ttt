@@ -4,7 +4,7 @@ echo
 echo "welcome to tic-tac-toe!"
 echo
 
-swipl -s tictactoe.pl -t halt -q -g ttt
+swipl -s lib/tictactoe.pl -t halt -q -g ttt
 
 echo
 echo "thank you for playing!"

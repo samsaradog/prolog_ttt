@@ -1,8 +1,8 @@
 %% best_move.plt
 
-:- use_module(best_move).
-:- use_module(grid).
-:- use_module(shuffle).
+:- use_module(lib/best_move).
+:- use_module(lib/grid).
+:- use_module(lib/shuffle).
 
 :- begin_tests(grid_values).
 
@@ -37,7 +37,7 @@ test(best_move0, [ setup(initialize_grid) ] ) :-
 	player_move(o,"1"),player_move(o,"2"),player_move(x,"3"),
 	player_move(o,"4"),player_move(x,"5"),player_move(x,"6"),
 	player_move(x,"7"),player_move(x,"8"),player_move(o,"9"),
-	not(best_move(_)).
+	\+best_move(_).
 
 %% Last empty space on the grid
 

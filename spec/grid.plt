@@ -1,6 +1,6 @@
 %% grid.plt
 
-:- use_module(grid).
+:- use_module(lib/grid).
 
 %%
 %% Test setting up the board
@@ -12,7 +12,7 @@ someVar([_A,o,_B]).
 
 test(grid_setup1) :-
 	someVar(Tmp),
-	not(maplist(var,Tmp)). 
+	\+maplist(var,Tmp). 
         
 test(grid_setup2) :-
   fetch_grid(Tmp),maplist(var,Tmp). 
@@ -31,10 +31,16 @@ test(grid_move1, [ fail ] ) :-
   player_move(x,"1"),fetch_grid(Tmp),maplist(var,Tmp).
 
 test(grid_move2) :-
-  not(player_move(x,"1")).
+  \+player_move(x,"1").
 
 test(grid_move3) :-
   player_move(o,"2"),fetch_grid(Tmp),moveTwo(Tmp).
+
+test(move_available) :-
+	move_available("3"),!.
+	
+test(move_not_available) :-
+	\+move_available("2").
 
 :- end_tests(grid_move).
 

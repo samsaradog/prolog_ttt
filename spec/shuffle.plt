@@ -1,6 +1,6 @@
 %% shuffle.plt
 
-:- use_module(shuffle).
+:- use_module(lib/shuffle).
 
 :- begin_tests(shuffle).
 /*

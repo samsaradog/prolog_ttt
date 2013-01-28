@@ -68,7 +68,7 @@ find_best_move(_Player,Move,Moves,_GridState) :-
 
 find_best_move(_Player,Move,Moves,_GridState) :-
 	length(Moves,8),
-	not(member("5",Moves)),
+	\+member("5",Moves),
 	shuffle(["1","3","7","9"],[Move|_]).
 
 %% when best move is the last one on the grid.
